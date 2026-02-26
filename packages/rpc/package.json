@@ -1,0 +1,22 @@
+{
+  "name": "@packages/rpc",
+  "version": "1.0.0",
+  "description": "RPC package used for sharing API specifications between the Hono server and clients",
+  "type": "module",
+  "main": "./dist/index.js",
+  "scripts": {
+    "dev": "tsc --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.23.0",
+  "dependencies": {
+    "@apps/server": "workspace:^",
+    "hono": "^4.12.2"
+  },
+  "devDependencies": {
+    "@types/node": "^25.3.0",
+    "typescript": "^5.9.3"
+  }
+}

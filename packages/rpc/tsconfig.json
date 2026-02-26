@@ -1,0 +1,19 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
+    "rootDir": "src",
+    "paths": {
+      "@/server/*": ["../../apps/server/src/*"]
+    },
+    "declaration": true,
+    "declarationMap": true,
+    "outDir": "dist",
+    "module": "ESNext",
+    "moduleResolution": "bundler"
+  },
+  "watchOptions": {
+    "excludeDirectories": ["**/node_modules"]
+  },
+  "include": ["src"]
+}

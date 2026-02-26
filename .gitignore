@@ -1,0 +1,28 @@
+# Node.js dependencies
+**/node_modules
+
+# Compiled output (ignore all 'dist', 'out', 'build' directories anywhere in the repo)
+**/dist
+**/out
+**/build
+
+# TypeScript incremental build files
+*.tsbuildinfo
+
+# Test coverage
+coverage
+.nyc_output
+results
+
+# Environment variables
+.env
+.env.local
+
+# IDEs and OS files
+**/.vscode/*
+**/.vscode/settings.json
+**/.vscode/tasks.json
+**/.vscode/launch.json
+**/.vscode/extensions.json
+.idea
+.DS_Store
