@@ -44,7 +44,7 @@
           <DropdownMenu>
             <DropdownMenuTrigger as-child>
               <SidebarMenuButton>
-                <User /> {{ authStore.getUser?.email }}
+                <User /> {{ session.data?.user.email }}
               </SidebarMenuButton>
             </DropdownMenuTrigger>
             <DropdownMenuContent
@@ -109,7 +109,7 @@ type GroupedRoute = {
 };
 
 const { openMobile, setOpenMobile } = useSidebar();
-const user = ref();
+const session = authClient.useSession();
 const authStore = useAuthStore();
 const activeRoute = useRoute();
 const router = useRouter();

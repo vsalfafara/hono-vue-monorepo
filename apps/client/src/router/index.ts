@@ -3,7 +3,6 @@ import {
   createWebHistory,
   type RouteRecordRaw,
 } from "vue-router";
-import { useAuthStore } from "@/stores/auth.store";
 import { dashboardRoutes } from "@/modules/dashboard/dashboard.routes";
 import { adminRoutes } from "@/modules/admin/admin.routes";
 import { authClient } from "@/lib/auth.utils";

@@ -37,6 +37,7 @@ export const useAuthStore = defineStore("auth", () => {
       toast.error(response.error.message!);
       return;
     }
+    await session.value.refetch();
     router.replace({ name: "Home" });
   }
 

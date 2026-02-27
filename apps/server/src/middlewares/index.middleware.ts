@@ -11,7 +11,7 @@ export default function configureMiddlewares(app: AppOpenAPI) {
     return next();
   });
   app.use(serveEmojiFavicon("🔥"));
-  app.use("/api/auth/*", corsMiddleware());
+  app.use("/api/*", corsMiddleware());
   app.use(loggerMiddleware());
   app.use(dbMiddleware());
   app.notFound(notFound);

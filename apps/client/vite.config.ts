@@ -5,30 +5,27 @@ import vueDevTools from "vite-plugin-vue-devtools";
 import tailwindcss from "@tailwindcss/vite";
 
 // https://vite.dev/config/
-export default defineConfig(({ mode }) => {
-  const env = loadEnv(mode, process.cwd(), "");
-  return {
-    build: {
-      outDir: "../server/public",
-      emptyOutDir: true,
+export default defineConfig({
+  build: {
+    outDir: "../server/public",
+    emptyOutDir: true,
+  },
+  plugins: [
+    vue(),
+    tailwindcss(),
+    process.env.NODE_ENV === "development" ? vueDevTools() : undefined,
+  ],
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "./src"),
     },
-    plugins: [
-      vue(),
-      tailwindcss(),
-      process.env.NODE_ENV === "development" ? vueDevTools() : undefined,
-    ],
-    resolve: {
-      alias: {
-        "@": path.resolve(__dirname, "./src"),
+  },
+  server: {
+    proxy: {
+      "/api/*": {
+        target: "http://localhost:9999/api",
+        changeOrigin: true,
       },
     },
-    // server: {
-    //   proxy: {
-    //     "/api": {
-    //       target: env.VITE_API_URL,
-    //       changeOrigin: true,
-    //     },
-    //   },
-    // },
-  };
+  },
 });

@@ -19,9 +19,6 @@ importers:
       '@packages/db':
         specifier: workspace:^
         version: link:../../packages/db
-      '@packages/env':
-        specifier: workspace:^
-        version: link:../../packages/env
       '@packages/rpc':
         specifier: workspace:^
         version: link:../../packages/rpc
