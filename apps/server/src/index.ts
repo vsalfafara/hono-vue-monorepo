@@ -2,23 +2,29 @@ import { serve } from "@hono/node-server";
 import app from "./app";
 import { envRuntime as env } from "@packages/env";
 import process from "process";
+import { createLogger } from "@packages/logger";
 
+const logger = createLogger("server");
 const port = env.PORT;
-console.log(`Server is running on http://localhost:${port}`);
 
-const server = serve({
-  fetch: app.fetch,
-  port,
-});
+const server = serve(
+  {
+    fetch: app.fetch,
+    port,
+  },
+  () => {
+    logger.info(`Server is running on http://localhost:${port}`);
+  },
+);
 
 function gracefulShutdown(signal: string) {
-  console.log(`${signal} received. Initiating graceful shutdown`);
+  logger.info(`${signal} received. Initiating graceful shutdown`);
   server.close((error) => {
     if (error) {
-      console.error(error);
+      logger.error({ error }, "Error shutting down server");
       process.exit(1);
     }
-    console.log("Server closed");
+    logger.info("Server closed");
     process.exit(0);
   });
 }

@@ -2,7 +2,7 @@ import type { AppOpenAPI } from "./types";
 import packageJSON from "../../package.json";
 import { Scalar } from "@scalar/hono-api-reference";
 
-export default function configureOpenApi(app: AppOpenAPI) {
+export function configureOpenApi(app: AppOpenAPI) {
   const { version, meta } = packageJSON;
 
   app.doc("/doc", {

@@ -18,6 +18,7 @@
     "@packages/db": "workspace:^",
     "@packages/env": "workspace:^",
     "@packages/rpc": "workspace:^",
+    "@packages/logger": "workspace:^",
     "@scalar/hono-api-reference": "^0.9.41",
     "drizzle-orm": "^0.45.1",
     "drizzle-zod": "^0.8.3",

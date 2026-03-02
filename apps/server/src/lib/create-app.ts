@@ -8,7 +8,3 @@ export function createRouter() {
     defaultHook,
   });
 }
-
-export default function createApp() {
-  return createRouter();
-}

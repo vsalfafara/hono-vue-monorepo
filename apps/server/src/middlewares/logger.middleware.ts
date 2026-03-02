@@ -1,16 +1,12 @@
 import { createMiddleware } from "hono/factory";
 import { pinoLogger } from "hono-pino";
-import pino from "pino";
-import pretty from "pino-pretty";
 import crypto from "node:crypto";
+import { createLogger } from "@packages/logger";
 
 export function loggerMiddleware() {
   return createMiddleware((c, next) =>
     pinoLogger({
-      pino: pino(
-        { level: c.env.LOG_LEVEL },
-        c.env.NODE_ENV === "production" ? undefined : pretty(),
-      ),
+      pino: createLogger("server-api", c.env),
       http: {
         reqId: () => crypto.randomUUID(),
       },

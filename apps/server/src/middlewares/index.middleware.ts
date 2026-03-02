@@ -4,16 +4,14 @@ import { loggerMiddleware } from "./logger.middleware";
 import { corsMiddleware } from "./cors.middleware";
 import { parseEnv } from "@packages/env";
 import { dbMiddleware } from "./db.middleware";
-import { serveStatic } from "@hono/node-server/serve-static";
 
-export default function configureMiddlewares(app: AppOpenAPI) {
+export function configureMiddlewares(app: AppOpenAPI) {
   app.use((c, next) => {
     parseEnv(Object.assign(c.env || {}, process.env));
     return next();
   });
   app.use(serveEmojiFavicon("🔥"));
   app.use("/api/*", corsMiddleware());
-  app.use("/*", serveStatic({ root: "./public" }));
   app.use(loggerMiddleware());
   app.use(dbMiddleware());
   app.notFound(notFound);
