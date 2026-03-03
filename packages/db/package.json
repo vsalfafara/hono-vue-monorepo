@@ -9,7 +9,7 @@
     "migrate": "drizzle-kit migrate"
   },
   "exports": {
-    ".": "./src/db.ts",
+    ".": "./index.ts",
     "./schema": "./src/schema/index.ts",
     "./validators": "./src/validators/index.ts"
   },
