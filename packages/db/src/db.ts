@@ -1,7 +1,7 @@
 import { drizzle } from "drizzle-orm/node-postgres";
 import { Pool } from "pg";
 import type { Environment } from "@packages/env";
-import * as schema from "../schema";
+import * as schema from "./schema";
 
 /**
  * Function to create drizzle instance on request

@@ -8,6 +8,11 @@
     "generate": "drizzle-kit generate",
     "migrate": "drizzle-kit migrate"
   },
+  "exports": {
+    ".": "./src/db.ts",
+    "./schema": "./src/schema/index.ts",
+    "./validators": "./src/validators/index.ts"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",

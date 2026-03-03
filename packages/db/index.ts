@@ -1,2 +1,2 @@
 export { createDb } from "./src/db";
-export * as schema from "./schema";
+export * as schema from "./src/schema";
