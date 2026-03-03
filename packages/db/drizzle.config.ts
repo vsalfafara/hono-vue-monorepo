@@ -1,4 +1,4 @@
-import { env } from "@packages/env";
+import { envRuntime } from "@packages/env";
 import { defineConfig } from "drizzle-kit";
 
 export default defineConfig({
@@ -6,6 +6,6 @@ export default defineConfig({
   out: "./migrations",
   dialect: "postgresql",
   dbCredentials: {
-    url: `postgresql://${env.DB_USER}:${env.DB_PASSWORD}@${env.DB_URL}:${env.DB_PORT}/${env.DB_NAME}`,
+    url: `postgresql://${envRuntime.DB_USER}:${envRuntime.DB_PASSWORD}@${envRuntime.DB_URL}:${envRuntime.DB_PORT}/${envRuntime.DB_NAME}`,
   },
 });

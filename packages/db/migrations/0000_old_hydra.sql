@@ -1,27 +1,4 @@
-CREATE SCHEMA "data";
---> statement-breakpoint
 CREATE SCHEMA "admin";
---> statement-breakpoint
-CREATE TABLE "data"."queue_item" (
-	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
-	"service_id" uuid,
-	"organization_id" text,
-	"queued" boolean DEFAULT false,
-	"done" boolean DEFAULT false NOT NULL,
-	"served_by" text,
-	"no_show" boolean DEFAULT false,
-	"created_at" timestamp DEFAULT now() NOT NULL,
-	"updated_at" timestamp DEFAULT now() NOT NULL
-);
---> statement-breakpoint
-CREATE TABLE "data"."service" (
-	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
-	"name" varchar(255),
-	"organization_id" text NOT NULL,
-	"created_by" text,
-	"created_at" timestamp DEFAULT now() NOT NULL,
-	"updated_at" timestamp DEFAULT now() NOT NULL
-);
 --> statement-breakpoint
 CREATE TABLE "admin"."account" (
 	"id" text PRIMARY KEY NOT NULL,
@@ -106,11 +83,6 @@ CREATE TABLE "admin"."verification" (
 	"updated_at" timestamp DEFAULT now() NOT NULL
 );
 --> statement-breakpoint
-ALTER TABLE "data"."queue_item" ADD CONSTRAINT "queue_item_service_id_service_id_fk" FOREIGN KEY ("service_id") REFERENCES "data"."service"("id") ON DELETE set null ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "data"."queue_item" ADD CONSTRAINT "queue_item_organization_id_organization_id_fk" FOREIGN KEY ("organization_id") REFERENCES "admin"."organization"("id") ON DELETE set null ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "data"."queue_item" ADD CONSTRAINT "queue_item_served_by_user_id_fk" FOREIGN KEY ("served_by") REFERENCES "admin"."user"("id") ON DELETE set null ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "data"."service" ADD CONSTRAINT "service_organization_id_organization_id_fk" FOREIGN KEY ("organization_id") REFERENCES "admin"."organization"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "data"."service" ADD CONSTRAINT "service_created_by_user_id_fk" FOREIGN KEY ("created_by") REFERENCES "admin"."user"("id") ON DELETE set null ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "admin"."account" ADD CONSTRAINT "account_user_id_user_id_fk" FOREIGN KEY ("user_id") REFERENCES "admin"."user"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "admin"."invitation" ADD CONSTRAINT "invitation_organization_id_organization_id_fk" FOREIGN KEY ("organization_id") REFERENCES "admin"."organization"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "admin"."invitation" ADD CONSTRAINT "invitation_inviter_id_user_id_fk" FOREIGN KEY ("inviter_id") REFERENCES "admin"."user"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint

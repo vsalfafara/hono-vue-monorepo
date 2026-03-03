@@ -1,4 +1,4 @@
 import { parseEnv } from "./env";
 
 //@ts-expect-error
-export default parseEnv(import.meta.env || process.env);
+export default parseEnv(process.env);
