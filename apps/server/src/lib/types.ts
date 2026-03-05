@@ -1,7 +1,7 @@
 import type { Environment } from "@packages/env";
 import type { OpenAPIHono, RouteConfig, RouteHandler } from "@hono/zod-openapi";
 import type { Session, User } from "@packages/auth";
-import { NodePgDatabase } from "drizzle-orm/node-postgres";
+import { NodePgDatabase } from "@packages/db/drizzle";
 import type { PinoLogger } from "hono-pino";
 import type { Pool } from "pg";
 import { schema } from "@packages/db";

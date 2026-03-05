@@ -158,12 +158,6 @@ importers:
       '@scalar/hono-api-reference':
         specifier: ^0.9.41
         version: 0.9.44(hono@4.12.2)
-      drizzle-orm:
-        specifier: ^0.45.1
-        version: 0.45.1(@types/pg@8.16.0)(kysely@0.28.11)(pg@8.18.0)(postgres@3.4.8)
-      drizzle-zod:
-        specifier: ^0.8.3
-        version: 0.8.3(drizzle-orm@0.45.1(@types/pg@8.16.0)(kysely@0.28.11)(pg@8.18.0)(postgres@3.4.8))(zod@4.3.6)
       hono:
         specifier: ^4.12.2
         version: 4.12.2
@@ -229,6 +223,9 @@ importers:
       '@packages/env':
         specifier: workspace:^
         version: link:../env
+      '@packages/logger':
+        specifier: workspace:^
+        version: link:../logger
       drizzle-orm:
         specifier: ^0.45.1
         version: 0.45.1(@types/pg@8.16.0)(kysely@0.28.11)(pg@8.18.0)(postgres@3.4.8)

@@ -10,6 +10,7 @@
   },
   "exports": {
     ".": "./index.ts",
+    "./drizzle": "./src/drizzle/index.ts",
     "./schema": "./src/schema/index.ts",
     "./validators": "./src/validators/index.ts"
   },
@@ -19,6 +20,7 @@
   "packageManager": "pnpm@10.23.0",
   "dependencies": {
     "@packages/env": "workspace:^",
+    "@packages/logger": "workspace:^",
     "drizzle-orm": "^0.45.1",
     "drizzle-zod": "^0.8.3",
     "pg": "^8.18.0",

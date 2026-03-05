@@ -1,15 +1,14 @@
 import { AppRouteHandler } from "../../lib/types";
 import { GetUserRoute, ListUsersRoute } from "./users.routes";
-import { createDb } from "@packages/db";
 import { HTTPStatusCodes } from "../../lib/helpers";
-import { eq } from "drizzle-orm";
+import { eq } from "@packages/db/drizzle";
 import { user } from "@packages/db/schema";
 
 export const listUsersHandler: AppRouteHandler<ListUsersRoute> = async ({
   json,
-  env,
+  get,
 }) => {
-  const { db } = createDb(env);
+  const db = get("db");
   const result = await db.query.user.findMany();
 
   return json(result, HTTPStatusCodes.OK);
@@ -17,10 +16,10 @@ export const listUsersHandler: AppRouteHandler<ListUsersRoute> = async ({
 
 export const getUserHandler: AppRouteHandler<GetUserRoute> = async ({
   json,
+  get,
   req,
-  env,
 }) => {
-  const { db } = createDb(env);
+  const db = get("db");
   const { id } = req.valid("param");
   const result = await db.query.user.findFirst({ where: eq(user.id, id) });
 

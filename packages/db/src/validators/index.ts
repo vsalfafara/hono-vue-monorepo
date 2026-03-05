@@ -1,7 +1,8 @@
 import { createInsertSchema, createSelectSchema } from "drizzle-zod";
-import { user } from "../schema";
+import { user, tasks } from "../schema";
 import z from "zod";
 
+// User Validators
 export const selectUserSchema = createSelectSchema(user);
 const insertUserSchemaBase = createInsertSchema(user, {
   name: z.string().min(1, { message: "Name is required" }),
@@ -43,3 +44,21 @@ export const updateUserSchema = insertUserSchemaBase
     message: "Passwords do not match",
     path: ["confirmPassword"],
   });
+
+// Task Validators
+export const selectTaskSchema = createSelectSchema(tasks);
+export const insertTaskSchema = createInsertSchema(tasks, {
+  title: z.string().min(1, { message: "Title is required" }),
+  description: z.string().optional(),
+}).omit({
+  id: true,
+  userId: true,
+  completed: true,
+  createdAt: true,
+  updatedAt: true,
+});
+export const updateTaskSchema = insertTaskSchema
+  .extend({
+    completed: z.boolean(),
+  })
+  .partial();

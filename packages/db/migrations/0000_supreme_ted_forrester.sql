@@ -1,4 +1,16 @@
+CREATE SCHEMA "data";
+--> statement-breakpoint
 CREATE SCHEMA "admin";
+--> statement-breakpoint
+CREATE TABLE "data"."tasks" (
+	"id" text PRIMARY KEY DEFAULT gen_random_uuid()::text NOT NULL,
+	"user_id" text,
+	"title" varchar(50) NOT NULL,
+	"description" text,
+	"completed" boolean DEFAULT false,
+	"created_at" timestamp DEFAULT now() NOT NULL,
+	"updated_at" timestamp DEFAULT now() NOT NULL
+);
 --> statement-breakpoint
 CREATE TABLE "admin"."account" (
 	"id" text PRIMARY KEY NOT NULL,
@@ -83,6 +95,7 @@ CREATE TABLE "admin"."verification" (
 	"updated_at" timestamp DEFAULT now() NOT NULL
 );
 --> statement-breakpoint
+ALTER TABLE "data"."tasks" ADD CONSTRAINT "tasks_user_id_user_id_fk" FOREIGN KEY ("user_id") REFERENCES "admin"."user"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "admin"."account" ADD CONSTRAINT "account_user_id_user_id_fk" FOREIGN KEY ("user_id") REFERENCES "admin"."user"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "admin"."invitation" ADD CONSTRAINT "invitation_organization_id_organization_id_fk" FOREIGN KEY ("organization_id") REFERENCES "admin"."organization"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "admin"."invitation" ADD CONSTRAINT "invitation_inviter_id_user_id_fk" FOREIGN KEY ("inviter_id") REFERENCES "admin"."user"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint

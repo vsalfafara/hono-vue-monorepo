@@ -7,6 +7,7 @@ import {
   uniqueIndex,
   pgSchema,
 } from "drizzle-orm/pg-core";
+import { tasks } from ".";
 
 export const adminSchema = pgSchema("admin");
 
@@ -149,6 +150,7 @@ export const userRelations = relations(user, ({ many }) => ({
   accounts: many(account),
   members: many(member),
   invitations: many(invitation),
+  tasks: many(tasks),
 }));
 
 export const sessionRelations = relations(session, ({ one }) => ({

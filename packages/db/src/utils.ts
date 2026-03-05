@@ -1,8 +1,12 @@
-import { timestamp, uuid } from "drizzle-orm/pg-core";
+import { sql } from "drizzle-orm";
+import { timestamp, text } from "drizzle-orm/pg-core";
 
 export function getIdColumn() {
   return {
-    id: uuid("id").primaryKey().defaultRandom(),
+    // Using text instead of uuid because of typescript errors
+    id: text("id")
+      .primaryKey()
+      .default(sql`gen_random_uuid()::text`),
   };
 }
 
