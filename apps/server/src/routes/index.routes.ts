@@ -1,10 +1,11 @@
 import { AppOpenAPI } from "@/server/lib/types";
 import { BASE_PATH } from "@/server/lib/constants";
+import health from "./health/health.index";
 import tasks from "./tasks/tasks.index";
 import users from "./users/users.index";
 
 export function configureRoutes(app: AppOpenAPI) {
-  const routes = [users, tasks];
+  const routes = [health, users, tasks];
   routes.forEach((route) => {
     app.route(BASE_PATH, route);
   });
