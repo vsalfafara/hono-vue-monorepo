@@ -10,8 +10,13 @@ export const buttonVariants = cva(
       variant: {
         default:
           "bg-primary text-primary-foreground hover:bg-primary/90 active:bg-primary/80",
+        info: "bg-info text-white hover:bg-info/90 active:bg-info/80 focus-visible:ring-info/20 dark:focus-visible:ring-info/40",
+        success:
+          "bg-success text-white hover:bg-success/90 active:bg-success/80 focus-visible:ring-success/20 dark:focus-visible:ring-success/40",
+        warning:
+          "bg-warning text-white hover:bg-warning/90 active:bg-warning/80 focus-visible:ring-warning/20 dark:focus-visible:ring-warning/40",
         destructive:
-          "bg-destructive text-white hover:bg-destructive/90 active:bg-destructive/80 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60",
+          "bg-destructive text-white hover:bg-destructive/90 active:bg-destructive/80 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40",
         outline:
           "border bg-background shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 active:bg-accent/90 dark:border-input dark:hover:bg-input/50",
         secondary:
