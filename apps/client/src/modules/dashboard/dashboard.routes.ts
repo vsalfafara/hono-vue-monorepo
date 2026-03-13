@@ -1,3 +1,3 @@
-import { homeRoutes } from "./home/home.routes";
+import { tasksRoutes } from "./tasks/tasks.routes";
 
-export const dashboardRoutes = [...homeRoutes];
+export const dashboardRoutes = [...tasksRoutes];

@@ -17,7 +17,7 @@ const layout: RouteRecordRaw = {
   beforeEnter: async (_, __) => {
     const { data } = await authClient.getSession();
     if (!data) return { name: "Login" };
-    return;
+    return true;
   },
 };
 
@@ -28,7 +28,7 @@ const routes: RouteRecordRaw[] = [
     component: () => import("@/modules/auth/Auth.vue"),
     beforeEnter: async (_, __) => {
       const { data } = await authClient.getSession();
-      if (data) return { name: "Home" };
+      if (data) return { name: "Tasks" };
       return true;
     },
   },

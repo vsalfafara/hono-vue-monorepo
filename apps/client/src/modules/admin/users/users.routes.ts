@@ -19,7 +19,7 @@ export const userRoutes: RouteRecordRaw[] = [
     beforeEnter: async (to, _) => {
       const { getPermissions } = useAuthStore();
       if (!getPermissions.can("view", to.name as Subject))
-        return { name: "Home" };
+        return { name: "Tasks" };
       return true;
     },
   },

@@ -1,49 +1,32 @@
 <template>
-  <div class="h-500">
-    <div class="mb-4 grid gap-y-4">
-      <h1 class="text-3xl font-semibold">Tasks</h1>
-      <p class="text-secondary-foreground text-sm">
-        Here's a list of all your tasks
-      </p>
-    </div>
-    <DataTable :data :columns :visibleColumns>
-      <template #actions>
-        <Button variant="success"> Create Task </Button>
-      </template>
-    </DataTable>
-  </div>
+  <DataTable :data :columns :visibleColumns :loading>
+    <template #actions>
+      <Button variant="success"> Create Task </Button>
+    </template>
+  </DataTable>
 </template>
 
 <script setup lang="ts">
 import { Button } from "@/components/ui/button";
 import { DataTable } from "@/components/custom/data-table";
-import { h, ref } from "vue";
-import { selectTaskSchema } from "@packages/db/validators";
-import type z from "zod";
-import type { tasks } from "@packages/db/schema";
+import type { Tasks } from "../tasks.types";
 import type { ColumnDef, VisibilityState } from "@tanstack/vue-table";
+import { useDateFormat, useStorage } from "@vueuse/core";
+import { h, onMounted, ref, toRefs, watch } from "vue";
 import { ArrowUpDown } from "lucide-vue-next";
 import { IconCircleCheckFilled, IconCircleMinus } from "@tabler/icons-vue";
-import { useDateFormat, useStorage } from "@vueuse/core";
+import { useTasksStore } from "../tasks.store";
+import { storeToRefs } from "pinia";
 
-type Data = typeof tasks.$inferSelect;
-const data = ref<Data[]>([
-  {
-    id: "43d1d16c-ffd0-4cfe-a141-85e44c190cbb",
-    userId: "EMjpQcHwhZwySwc5hJAAjvS9oVmEFlAT",
-    title: "test",
-    description: "asd",
-    completed: true,
-    createdAt: new Date("2026-03-05T16:35:40.498Z"),
-    updatedAt: new Date("2026-03-05T16:44:51.149Z"),
-  },
-]);
+const tasksStore = useTasksStore();
+const { data, loading } = storeToRefs(tasksStore);
+
 const visibleColumns = useStorage<VisibilityState>(
   "tasks-table",
   {},
   localStorage,
 );
-const columns: ColumnDef<Data>[] = [
+const columns: ColumnDef<Tasks>[] = [
   {
     accessorKey: "title",
     enableSorting: true,
@@ -123,4 +106,8 @@ const columns: ColumnDef<Data>[] = [
     },
   },
 ];
+
+onMounted(async () => {
+  await tasksStore.fetchData();
+});
 </script>

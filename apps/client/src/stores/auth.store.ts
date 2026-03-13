@@ -38,7 +38,7 @@ export const useAuthStore = defineStore("auth", () => {
       return;
     }
     await session.value.refetch();
-    router.replace({ name: "Home" });
+    router.replace({ name: "Tasks" });
   }
 
   async function logout() {

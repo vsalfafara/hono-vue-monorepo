@@ -7,7 +7,7 @@ export function getUserPermissions(role: string | null | undefined) {
     cannot: forbid,
   } = new AbilityBuilder(createMongoAbility);
 
-  allow("view", "Home");
+  allow("view", "Tasks");
   if (role === "admin") allow("view", "Users");
 
   return build();

@@ -12,10 +12,12 @@ export function getIdColumn() {
 
 export function getTimestampsColumns() {
   return {
-    createdAt: timestamp("created_at").defaultNow().notNull(),
-    updatedAt: timestamp("updated_at")
+    createdAt: timestamp("created_at", { mode: "string" })
       .defaultNow()
-      .$onUpdate(() => /* @__PURE__ */ new Date())
+      .notNull(),
+    updatedAt: timestamp("updated_at", { mode: "string" })
+      .defaultNow()
+      .$onUpdate(() => /* @__PURE__ */ new Date().toLocaleDateString())
       .notNull(),
   };
 }

@@ -2,16 +2,17 @@ import { ROLES, SIDEBARGROUPS } from "@/constants";
 import { Home } from "lucide-vue-next";
 import type { RouteRecordRaw } from "vue-router";
 
-const HomePage = async () => await import("./Home.vue");
+const TaskPage = async () => await import("./Tasks.vue");
 
-export const homeRoutes: RouteRecordRaw[] = [
+export const tasksRoutes: RouteRecordRaw[] = [
   {
-    path: "/home",
-    name: "Home",
-    component: HomePage,
+    path: "/tasks",
+    name: "Tasks",
+    component: TaskPage,
     meta: {
       group: SIDEBARGROUPS.dashboard,
       icon: Home,
+      title: "Tasks",
     },
   },
 ];

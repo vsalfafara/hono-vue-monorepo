@@ -77,7 +77,7 @@
           </TableRow>
         </TableHeader>
         <TableBody>
-          <TableRow v-if="isLoading">
+          <TableRow v-if="loading">
             <TableCell :colspan="columns.length" class="h-24 text-center">
               <div class="flex items-center justify-center">
                 <Loader2 class="mr-2 animate-spin" /> Loading...
@@ -172,7 +172,7 @@ import { Input } from "@/components/ui/input";
 type DataTableProps = {
   data: any[];
   columns: ColumnDef<TData, TValue>[];
-  isLoading?: boolean;
+  loading?: boolean;
   enableFilter?: boolean;
   visibleColumns?: VisibilityState;
 };
@@ -180,7 +180,7 @@ type DataTableProps = {
 const {
   data = [],
   columns,
-  isLoading = false,
+  loading = true,
   enableFilter,
   visibleColumns = {},
 } = defineProps<DataTableProps>();
