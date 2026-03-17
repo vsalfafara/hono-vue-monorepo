@@ -5,7 +5,7 @@ import tasks from "./tasks/tasks.index";
 import users from "./users/users.index";
 
 export function configureRoutes(app: AppOpenAPI) {
-  const routes = [health, users, tasks];
+  const routes = [health, tasks, users];
   routes.forEach((route) => {
     app.route(BASE_PATH, route);
   });

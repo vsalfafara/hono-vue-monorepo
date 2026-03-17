@@ -1,13 +1,15 @@
 import { AppRouteHandler } from "@/server/lib/types";
 import {
+  CompleteTaskRoute,
   CreateTaskRoute,
+  DeleteTaskRoute,
   GetTaskRoute,
   ListTasksRoute,
   UpdateTaskRoute,
 } from "./tasks.routes";
 import { tasks } from "@packages/db/schema";
 import { HTTPStatusCodes } from "@/server/lib/helpers";
-import { eq } from "@packages/db/drizzle";
+import { desc, eq } from "@packages/db/drizzle";
 
 export const listTasksHandler: AppRouteHandler<ListTasksRoute> = async ({
   json,
@@ -17,6 +19,7 @@ export const listTasksHandler: AppRouteHandler<ListTasksRoute> = async ({
   const authUser = get("user");
   const result = await db.query.tasks.findMany({
     where: (tasks, { eq }) => eq(tasks.userId, authUser.id),
+    orderBy: [desc(tasks.updatedAt)],
   });
 
   return json(result, HTTPStatusCodes.OK);
@@ -72,4 +75,38 @@ export const updateTaskHandler: AppRouteHandler<UpdateTaskRoute> = async ({
     return json({ message: "Task not found" }, HTTPStatusCodes.NOT_FOUND);
 
   return json(result, HTTPStatusCodes.OK);
+};
+
+export const completeTaskHandler: AppRouteHandler<CompleteTaskRoute> = async ({
+  json,
+  get,
+  req,
+}) => {
+  const { id } = req.valid("param");
+  const db = get("db");
+  const [result] = await db
+    .update(tasks)
+    .set({ completed: true })
+    .where(eq(tasks.id, id))
+    .returning();
+
+  if (!result)
+    return json({ message: "Task not found" }, HTTPStatusCodes.NOT_FOUND);
+
+  return json(result, HTTPStatusCodes.OK);
+};
+
+export const deleteTaskHandler: AppRouteHandler<DeleteTaskRoute> = async ({
+  json,
+  get,
+  req,
+}) => {
+  const { id } = req.valid("param");
+  const db = get("db");
+  const [result] = await db.delete(tasks).where(eq(tasks.id, id)).returning();
+
+  if (!result)
+    return json({ message: "Task not found" }, HTTPStatusCodes.NOT_FOUND);
+
+  return json({ message: "Task Deleted" }, HTTPStatusCodes.OK);
 };

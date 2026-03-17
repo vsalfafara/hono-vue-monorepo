@@ -3,9 +3,9 @@ export const SIDEBARGROUPS = {
   admin: "Admin",
 };
 
-export const APPNAME = "Vue ShadCN Template";
-
 export const ROLES = {
   USER: "user",
   ADMIN: "admin",
 };
+
+export const APPNAME = "Vue ShadCN Template";

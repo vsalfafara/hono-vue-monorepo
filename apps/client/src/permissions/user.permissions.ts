@@ -1,3 +1,4 @@
+import { ROLES } from "@/constants";
 import { AbilityBuilder, createMongoAbility } from "@casl/ability";
 
 export function getUserPermissions(role: string | null | undefined) {
@@ -8,7 +9,7 @@ export function getUserPermissions(role: string | null | undefined) {
   } = new AbilityBuilder(createMongoAbility);
 
   allow("view", "Tasks");
-  if (role === "admin") allow("view", "Users");
+  if (role === ROLES.ADMIN) allow("view", "Users");
 
   return build();
 }

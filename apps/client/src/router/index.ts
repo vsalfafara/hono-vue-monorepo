@@ -6,15 +6,16 @@ import {
 import { dashboardRoutes } from "@/modules/dashboard/dashboard.routes";
 import { adminRoutes } from "@/modules/admin/admin.routes";
 import { authClient } from "@/lib/auth.utils";
+import { APPNAME } from "@/constants";
 
 export const appRoutes: RouteRecordRaw[] = [...dashboardRoutes, ...adminRoutes];
 
 const layout: RouteRecordRaw = {
   path: "/",
   component: () => import("@/layout/AppLayout.vue"),
-  redirect: { name: "Home" },
+  redirect: { name: "Tasks" },
   children: [...appRoutes],
-  beforeEnter: async (_, __) => {
+  beforeEnter: async (to, __) => {
     const { data } = await authClient.getSession();
     if (!data) return { name: "Login" };
     return true;
@@ -42,6 +43,11 @@ const routes: RouteRecordRaw[] = [
 const router = createRouter({
   history: createWebHistory(),
   routes,
+});
+
+router.beforeEach((to) => {
+  document.title = `${to.meta.title} - ${APPNAME}`;
+  return;
 });
 
 export default router;

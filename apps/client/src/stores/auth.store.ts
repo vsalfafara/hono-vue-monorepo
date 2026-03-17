@@ -9,9 +9,11 @@ import { toast } from "vue-sonner";
 import type { Session, User } from "better-auth";
 import type { Credentials } from "@/types/auth.types";
 import type { UserWithRole } from "better-auth/plugins";
+import { useTasksStore } from "@/modules/dashboard/tasks/tasks.store";
 
 export const useAuthStore = defineStore("auth", () => {
   const router = useRouter();
+  const taskStore = useTasksStore();
   const session = authClient.useSession();
   const getSession = computed<Session | undefined>(
     () => authClient.useSession().value.data?.session,
@@ -43,6 +45,7 @@ export const useAuthStore = defineStore("auth", () => {
 
   async function logout() {
     await authClient.signOut();
+    taskStore.$reset();
     await router.replace({ name: "Login" });
   }
 

@@ -3,7 +3,7 @@
     <SidebarHeader>
       <SidebarMenu>
         <SidebarMenuItem>
-          <SidebarMenuButton size="lg" @click="handleNavigate('Home')">
+          <SidebarMenuButton size="lg" @click="handleNavigate('Tasks')">
             <div
               class="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg"
             >
@@ -109,14 +109,13 @@ type GroupedRoute = {
 };
 
 const { openMobile, setOpenMobile } = useSidebar();
-const session = authClient.useSession();
 const authStore = useAuthStore();
+const { session } = storeToRefs(authStore);
 const activeRoute = useRoute();
 const router = useRouter();
 const groupedRoutes = ref<GroupedRoute[]>([]);
 
 onBeforeMount(async () => {
-  await authStore.session.refetch();
   Object.values(SIDEBARGROUPS).forEach((group) => {
     const routes = {
       name: group,

@@ -7,6 +7,8 @@ const tags = ["Health"];
 
 export const checkHealthRoute = createRoute({
   tags,
+  summary: "Check Health",
+  description: "Check health",
   path: "/health",
   method: "get",
   responses: {

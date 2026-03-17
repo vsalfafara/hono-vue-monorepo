@@ -1,5 +1,5 @@
 import client from "@packages/rpc";
-import { ref, watchEffect } from "vue";
+import { ref } from "vue";
 import { toast } from "vue-sonner";
 
 function delay(ms: number) {
@@ -13,29 +13,25 @@ export const apiClient = client("/api", {
 });
 
 export function useApi() {
-  const error = ref<{ message: string } | null>(null);
   const loading = ref(false);
 
-  const execute = async (fn: Function) => {
+  const execute = async (fn: Function, params = {}) => {
     loading.value = true;
-    error.value = null;
 
-    const response = await fn();
+    let response = null;
+    await delay(1000);
+    if (params) response = await fn(params);
+    else response = await fn();
     loading.value = false;
 
     if (!response.ok) {
-      error.value = await response.json();
+      toast.error("Something went wrong");
       return;
     }
     return await response.json();
   };
 
-  watchEffect(() => {
-    if (error.value) toast.error(error.value.message);
-  });
-
   return {
-    error,
     loading,
     execute,
   };

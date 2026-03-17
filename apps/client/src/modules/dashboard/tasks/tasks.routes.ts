@@ -2,7 +2,7 @@ import { ROLES, SIDEBARGROUPS } from "@/constants";
 import { Home } from "lucide-vue-next";
 import type { RouteRecordRaw } from "vue-router";
 
-const TaskPage = async () => await import("./Tasks.vue");
+const TaskPage = async () => await import("./pages/Tasks.vue");
 
 export const tasksRoutes: RouteRecordRaw[] = [
   {

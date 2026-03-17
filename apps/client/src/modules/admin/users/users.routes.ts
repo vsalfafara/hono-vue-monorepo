@@ -5,7 +5,7 @@ import { Users } from "lucide-vue-next";
 import type { RouteRecordRaw } from "vue-router";
 import { toast } from "vue-sonner";
 
-const UsersPage = () => import("./Users.vue");
+const UsersPage = () => import("./pages/Users.vue");
 
 export const userRoutes: RouteRecordRaw[] = [
   {
@@ -15,6 +15,7 @@ export const userRoutes: RouteRecordRaw[] = [
     meta: {
       group: SIDEBARGROUPS.admin,
       icon: Users,
+      title: "Users",
     },
     beforeEnter: async (to, _) => {
       const { getPermissions } = useAuthStore();

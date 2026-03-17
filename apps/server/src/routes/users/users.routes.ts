@@ -12,6 +12,8 @@ const tags = ["Users"];
 
 export const listUsersRoute = createRoute({
   tags,
+  summary: "Get All Users (ADMIN)",
+  description: "[ADMIN ONLY] Get all users",
   middleware: [authMiddleware(), adminMiddleware({ user: ["list"] })],
   path: "/users",
   method: "get",
@@ -29,6 +31,8 @@ export const listUsersRoute = createRoute({
 
 export const getUserRoute = createRoute({
   tags,
+  summary: "Get Specific User (ADMIN)",
+  description: "[ADMIN ONLY] Get specific user using User ID",
   middleware: [authMiddleware(), adminMiddleware({ user: ["get"] })],
   path: "/users/{id}",
   method: "get",
