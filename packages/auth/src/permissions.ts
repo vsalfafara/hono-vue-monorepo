@@ -4,6 +4,7 @@ import { defaultStatements, adminAc } from "better-auth/plugins/admin/access";
 const statement = {
   ...defaultStatements,
   tasks: ["create", "read", "list", "update", "delete"],
+  dashboard: ["read"],
 };
 
 export const ac = createAccessControl(statement);
@@ -14,6 +15,7 @@ export const user = ac.newRole({
 
 export const admin = ac.newRole({
   tasks: ["create", "read", "list", "update", "delete"],
+  dashboard: ["read"],
   ...adminAc.statements,
 });
 
