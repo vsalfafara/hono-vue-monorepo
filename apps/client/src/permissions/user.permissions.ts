@@ -9,7 +9,11 @@ export function getUserPermissions(role: string | null | undefined) {
   } = new AbilityBuilder(createMongoAbility);
 
   allow("view", "Tasks");
-  if (role === ROLES.ADMIN) allow("view", "Users");
+
+  if (role === ROLES.ADMIN) {
+    allow("view", "Users");
+    allow("view", "Dashboard");
+  }
 
   return build();
 }

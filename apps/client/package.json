@@ -22,6 +22,8 @@
     "@tailwindcss/vite": "^4.1.18",
     "@tanstack/vue-form": "^1.28.3",
     "@tanstack/vue-table": "^8.21.3",
+    "@unovis/ts": "^1.6.4",
+    "@unovis/vue": "^1.6.4",
     "@vee-validate/zod": "^4.15.1",
     "@vueuse/core": "^14.2.1",
     "better-auth": "^1.4.18",

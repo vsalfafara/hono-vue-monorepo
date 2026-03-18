@@ -1,21 +1,20 @@
-import { ROLES, SIDEBARGROUPS } from "@/constants";
+import { SIDEBARGROUPS } from "@/constants";
 import { useAuthStore } from "@/stores/auth.store";
 import type { Subject } from "@casl/ability";
-import { Users } from "lucide-vue-next";
+import { LayoutDashboard } from "lucide-vue-next";
 import type { RouteRecordRaw } from "vue-router";
-import { toast } from "vue-sonner";
 
-export const userRoutes: RouteRecordRaw[] = [
+export const dashboardRoutes: RouteRecordRaw[] = [
   {
-    path: "/users",
-    name: "Users",
-    component: () => import("./pages/Users.vue"),
+    path: "/dashboard",
+    component: () => import("./pages/Dashboard.vue"),
+    name: "Dashboard",
     meta: {
       group: SIDEBARGROUPS.admin,
-      icon: Users,
-      title: "Users",
+      icon: LayoutDashboard,
+      title: "Dashboard",
     },
-    beforeEnter: (to) => {
+    beforeEnter: async (to) => {
       const { getPermissions } = useAuthStore();
       if (!getPermissions.can("view", to.name as Subject))
         return { name: "Tasks" };

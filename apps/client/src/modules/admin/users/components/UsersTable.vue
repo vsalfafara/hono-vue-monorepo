@@ -8,7 +8,15 @@ import { DataTable } from "@/components/custom/data-table";
 import type { User } from "../users.types";
 import type { ColumnDef, VisibilityState } from "@tanstack/vue-table";
 import { useDateFormat, useStorage } from "@vueuse/core";
-import { h, onBeforeMount, onMounted, ref, toRefs, watch } from "vue";
+import {
+  capitalize,
+  h,
+  onBeforeMount,
+  onMounted,
+  ref,
+  toRefs,
+  watch,
+} from "vue";
 import { ArrowUpDown } from "lucide-vue-next";
 import { IconCircleCheckFilled, IconCircleMinus } from "@tabler/icons-vue";
 import { useUserStore } from "../users.store";
@@ -84,6 +92,22 @@ const columns: ColumnDef<User>[] = [
 
       return h(Badge, { variant }, () => [badgeContent]);
     },
+  },
+  {
+    accessorKey: "role",
+    enableSorting: true,
+    meta: "Role",
+    header: ({ column }) => {
+      return h(
+        Button,
+        {
+          variant: "ghost",
+          onClick: () => column.toggleSorting(column.getIsSorted() === "asc"),
+        },
+        () => ["Role", h(ArrowUpDown, { class: "ml-2 h-4 w-4" })],
+      );
+    },
+    cell: ({ row }) => capitalize(row.getValue("role") as string),
   },
 ];
 

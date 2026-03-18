@@ -21,7 +21,11 @@
       <SidebarGroup v-for="(group, index) in groupedRoutes" :key="group.name">
         <SidebarGroupLabel>{{ group.name }}</SidebarGroupLabel>
         <SidebarGroupContent>
-          <SidebarMenu v-for="route in group.routes" :key="route.name">
+          <SidebarMenu
+            v-for="route in group.routes"
+            :key="route.name"
+            class="mb-1"
+          >
             <SidebarMenuItem>
               <SidebarMenuButton
                 as-child

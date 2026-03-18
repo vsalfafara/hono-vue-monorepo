@@ -2,8 +2,8 @@ import client from "@packages/rpc";
 import { ref } from "vue";
 import { toast } from "vue-sonner";
 
-function delay(ms: number) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
+function delay(seconds: number) {
+  return new Promise((resolve) => setTimeout(resolve, seconds * 1000));
 }
 
 export const apiClient = client("/api", {
@@ -17,11 +17,8 @@ export function useApi() {
 
   const execute = async (fn: Function, params = {}) => {
     loading.value = true;
-
     let response = null;
-    await delay(1000);
-    if (params) response = await fn(params);
-    else response = await fn();
+    response = params ? await fn(params) : await fn();
     loading.value = false;
 
     if (!response.ok) {
